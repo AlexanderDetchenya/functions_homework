@@ -4,25 +4,26 @@
 #
 # примерно такое:
 
-def summa():
-    a = int(input('Введите первое число: '))
-    b = int(input('Введите второе число: '))
-    sum = a + b
-    return sum
-
-
-def summa_decore(summa):
-    def decore():
+def summa_check_int(fn):
+    def summa_fun(x, y):
         try:
-            summa()
-        except ValueError:
-            print('Ошибка')
+            fn(x, y)
+        except TypeError:
+            print(f'{str(fn.__name__)}{x , y} - ошибка!')
+        else:
+            print(f'{str(fn.__name__)}{x, y} - {fn(x, y)}')
+    return summa_fun
 
 
+@ summa_check_int
+def summa(a,  b):
+    return a+b
 
 
-summa_decore(summa)
-print(summa_decore(summa))
+summa(2, 128)
+summa(6, '1488')
+
+
 
 
 
